@@ -1,9 +1,9 @@
 <?php
 
-namespace OWS\Workflow;
+namespace Pitangent\Workflow;
 
 use Illuminate\Support\Collection;
-use OWS\Workflow\Exceptions\WildcardPermissionNotProperlyFormatted;
+use Pitangent\Workflow\Exceptions\WildcardPermissionNotProperlyFormatted;
 
 class WildcardPermission
 {

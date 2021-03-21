@@ -1,6 +1,6 @@
 <?php
 
-namespace OWS\Workflow\Contracts;
+namespace Pitangent\Workflow\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -19,7 +19,7 @@ interface Permission
      * @param string $name
      * @param string|null $guardName
      *
-     * @throws \OWS\Workflow\Exceptions\PermissionDoesNotExist
+     * @throws \Pitangent\Workflow\Exceptions\PermissionDoesNotExist
      *
      * @return Permission
      */
@@ -31,7 +31,7 @@ interface Permission
      * @param int $id
      * @param string|null $guardName
      *
-     * @throws \OWS\Workflow\Exceptions\PermissionDoesNotExist
+     * @throws \Pitangent\Workflow\Exceptions\PermissionDoesNotExist
      *
      * @return Permission
      */

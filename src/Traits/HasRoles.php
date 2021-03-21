@@ -1,11 +1,11 @@
 <?php
 
-namespace OWS\Workflow\Traits;
+namespace Pitangent\Workflow\Traits;
 
 use Illuminate\Support\Collection;
-use OWS\Workflow\Contracts\Role;
+use Pitangent\Workflow\Contracts\Role;
 use Illuminate\Database\Eloquent\Builder;
-use OWS\Workflow\PermissionRegistrar;
+use Pitangent\Workflow\PermissionRegistrar;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 
 trait HasRoles
@@ -52,7 +52,7 @@ trait HasRoles
      * Scope the model query to certain roles only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array|\OWS\Workflow\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|array|\Pitangent\Workflow\Contracts\Role|\Illuminate\Support\Collection $roles
      * @param string $guard
      *
      * @return \Illuminate\Database\Eloquent\Builder
@@ -86,7 +86,7 @@ trait HasRoles
     /**
      * Assign the given role to the model.
      *
-     * @param array|string|\OWS\Workflow\Contracts\Role ...$roles
+     * @param array|string|\Pitangent\Workflow\Contracts\Role ...$roles
      *
      * @return $this
      */
@@ -138,7 +138,7 @@ trait HasRoles
     /**
      * Revoke the given role from the model.
      *
-     * @param string|\OWS\Workflow\Contracts\Role $role
+     * @param string|\Pitangent\Workflow\Contracts\Role $role
      */
     public function removeRole($role)
     {
@@ -154,7 +154,7 @@ trait HasRoles
     /**
      * Remove all current roles and set the given ones.
      *
-     * @param  array|\OWS\Workflow\Contracts\Role|string  ...$roles
+     * @param  array|\Pitangent\Workflow\Contracts\Role|string  ...$roles
      *
      * @return $this
      */
@@ -168,7 +168,7 @@ trait HasRoles
     /**
      * Determine if the model has (one of) the given role(s).
      *
-     * @param string|int|array|\OWS\Workflow\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|int|array|\Pitangent\Workflow\Contracts\Role|\Illuminate\Support\Collection $roles
      * @param string|null $guard
      * @return bool
      */
@@ -212,7 +212,7 @@ trait HasRoles
      *
      * Alias to hasRole() but without Guard controls
      *
-     * @param string|int|array|\OWS\Workflow\Contracts\Role|\Illuminate\Support\Collection $roles
+     * @param string|int|array|\Pitangent\Workflow\Contracts\Role|\Illuminate\Support\Collection $roles
      *
      * @return bool
      */
@@ -224,7 +224,7 @@ trait HasRoles
     /**
      * Determine if the model has all of the given role(s).
      *
-     * @param  string|array|\OWS\Workflow\Contracts\Role|\Illuminate\Support\Collection  $roles
+     * @param  string|array|\Pitangent\Workflow\Contracts\Role|\Illuminate\Support\Collection  $roles
      * @param  string|null  $guard
      * @return bool
      */

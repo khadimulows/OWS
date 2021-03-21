@@ -1,18 +1,18 @@
 <?php
 
-namespace OWS\Workflow\Models;
+namespace Pitangent\Workflow\Models;
 
-use OWS\Workflow\Guard;
+use Pitangent\Workflow\Guard;
 use Illuminate\Support\Collection;
-use OWS\Workflow\Traits\HasRoles;
+use Pitangent\Workflow\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
-use OWS\Workflow\PermissionRegistrar;
-use OWS\Workflow\Traits\RefreshesPermissionCache;
+use Pitangent\Workflow\PermissionRegistrar;
+use Pitangent\Workflow\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use OWS\Workflow\Exceptions\PermissionDoesNotExist;
+use Pitangent\Workflow\Exceptions\PermissionDoesNotExist;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use OWS\Workflow\Exceptions\PermissionAlreadyExists;
-use OWS\Workflow\Contracts\Permission as PermissionContract;
+use Pitangent\Workflow\Exceptions\PermissionAlreadyExists;
+use Pitangent\Workflow\Contracts\Permission as PermissionContract;
 
 class Permission extends Model implements PermissionContract
 {
@@ -76,9 +76,9 @@ class Permission extends Model implements PermissionContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @throws \OWS\Workflow\Exceptions\PermissionDoesNotExist
+     * @throws \Pitangent\Workflow\Exceptions\PermissionDoesNotExist
      *
-     * @return \OWS\Workflow\Contracts\Permission
+     * @return \Pitangent\Workflow\Contracts\Permission
      */
     public static function findByName(string $name, $guardName = null): PermissionContract
     {
@@ -97,9 +97,9 @@ class Permission extends Model implements PermissionContract
      * @param int $id
      * @param string|null $guardName
      *
-     * @throws \OWS\Workflow\Exceptions\PermissionDoesNotExist
+     * @throws \Pitangent\Workflow\Exceptions\PermissionDoesNotExist
      *
-     * @return \OWS\Workflow\Contracts\Permission
+     * @return \Pitangent\Workflow\Contracts\Permission
      */
     public static function findById(int $id, $guardName = null): PermissionContract
     {
@@ -119,7 +119,7 @@ class Permission extends Model implements PermissionContract
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \OWS\Workflow\Contracts\Permission
+     * @return \Pitangent\Workflow\Contracts\Permission
      */
     public static function findOrCreate(string $name, $guardName = null): PermissionContract
     {

@@ -1,14 +1,14 @@
 <?php
 
-namespace OWS\Workflow;
+namespace Pitangent\Workflow;
 
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\Compilers\BladeCompiler;
-use OWS\Workflow\Contracts\Role as RoleContract;
-use OWS\Workflow\Contracts\Permission as PermissionContract;
+use Pitangent\Workflow\Contracts\Role as RoleContract;
+use Pitangent\Workflow\Contracts\Permission as PermissionContract;
 
 class PermissionServiceProvider extends ServiceProvider
 {

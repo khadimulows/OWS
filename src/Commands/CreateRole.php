@@ -1,10 +1,10 @@
 <?php
 
-namespace OWS\Workflow\Commands;
+namespace Pitangent\Workflow\Commands;
 
 use Illuminate\Console\Command;
-use OWS\Workflow\Contracts\Role;
-use OWS\Workflow\Contracts\Permission;
+use Pitangent\Workflow\Contracts\Role;
+use Pitangent\Workflow\Contracts\Permission;
 
 class CreateRole extends Command
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace OWS\Workflow;
+namespace Pitangent\Workflow;
 
 class Workflow
 {

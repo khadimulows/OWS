@@ -1,11 +1,11 @@
 <?php
 
-namespace OWS\Workflow\Commands;
+namespace Pitangent\Workflow\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Collection;
-use OWS\Workflow\Models\Role;
-use OWS\Workflow\Models\Permission;
+use Pitangent\Workflow\Models\Role;
+use Pitangent\Workflow\Models\Permission;
 
 class Show extends Command
 {

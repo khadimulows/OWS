@@ -1,5 +1,5 @@
 {
-    "name": "khadimul/workflow",
+    "name": "pitangent/workflow",
     "description": "I've created this package to maintaining our code stability on Laravel",
     "license": "MIT",
     "authors": [
@@ -12,7 +12,11 @@
     "homepage": "https://github.com/ows/workflow",
     "keywords": ["Laravel", "Workflow"],
     "require": {
-        "illuminate/support": "~7|~8"
+        "illuminate/support": "~5|~6|~7|~8",
+        "illuminate/auth": "~5|~6|~7|~8",
+        "illuminate/container": "~5|~6|~7|~8",
+        "illuminate/contracts": "~5|~6|~7|~8",
+        "illuminate/database": "~5|~6|~7|~8"
     },
     "require-dev": {
         "phpunit/phpunit": "~9.0",
@@ -20,22 +24,22 @@
     },
     "autoload": {
         "psr-4": {
-            "OWS\\Workflow\\": "src/"
+            "Pitangent\\Workflow\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "OWS\\Workflow\\Tests\\": "tests"
+            "Pitangent\\Workflow\\Tests\\": "tests"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "OWS\\Workflow\\WorkflowServiceProvider",
-                "OWS\\Workflow\\PermissionServiceProvider"
+                "Pitangent\\Workflow\\WorkflowServiceProvider",
+                "Pitangent\\Workflow\\PermissionServiceProvider"
             ],
             "aliases": {
-                "Workflow": "OWS\\Workflow\\Facades\\Workflow"
+                "Workflow": "Pitangent\\Workflow\\Facades\\Workflow"
             }
         }
     }

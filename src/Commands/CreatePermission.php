@@ -1,9 +1,9 @@
 <?php
 
-namespace OWS\Workflow\Commands;
+namespace Pitangent\Workflow\Commands;
 
 use Illuminate\Console\Command;
-use OWS\Workflow\Contracts\Permission;
+use Pitangent\Workflow\Contracts\Permission;
 
 class CreatePermission extends Command
 {

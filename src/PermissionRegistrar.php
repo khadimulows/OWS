@@ -1,12 +1,12 @@
 <?php
 
-namespace OWS\Workflow;
+namespace Pitangent\Workflow;
 
 use Illuminate\Cache\CacheManager;
 use Illuminate\Support\Collection;
-use OWS\Workflow\Contracts\Role;
+use Pitangent\Workflow\Contracts\Role;
 use Illuminate\Contracts\Auth\Access\Gate;
-use OWS\Workflow\Contracts\Permission;
+use Pitangent\Workflow\Contracts\Permission;
 use Illuminate\Contracts\Auth\Access\Authorizable;
 
 class PermissionRegistrar
@@ -143,7 +143,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the permission class.
      *
-     * @return \OWS\Workflow\Contracts\Permission
+     * @return \Pitangent\Workflow\Contracts\Permission
      */
     public function getPermissionClass(): Permission
     {
@@ -160,7 +160,7 @@ class PermissionRegistrar
     /**
      * Get an instance of the role class.
      *
-     * @return \OWS\Workflow\Contracts\Role
+     * @return \Pitangent\Workflow\Contracts\Role
      */
     public function getRoleClass(): Role
     {

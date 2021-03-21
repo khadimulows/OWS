@@ -1,6 +1,6 @@
 <?php
 
-namespace OWS\Workflow\Facades;
+namespace Pitangent\Workflow\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace OWS\Workflow\Middlewares;
+namespace Pitangent\Workflow\Http\Middlewares;
 
 use Closure;
-use OWS\Workflow\Exceptions\UnauthorizedException;
+use Pitangent\Workflow\Exceptions\UnauthorizedException;
 
 class PermissionMiddleware
 {

@@ -1,6 +1,6 @@
 <?php
 
-namespace OWS\Workflow\Exceptions;
+namespace Pitangent\Workflow\Exceptions;
 
 use Symfony\Component\HttpKernel\Exception\HttpException;
 

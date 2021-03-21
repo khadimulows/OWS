@@ -1,10 +1,10 @@
 <?php
 
-namespace OWS\Workflow\Middlewares;
+namespace Pitangent\Workflow\Http\Middlewares;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use OWS\Workflow\Exceptions\UnauthorizedException;
+use Pitangent\Workflow\Exceptions\UnauthorizedException;
 
 class RoleMiddleware
 {

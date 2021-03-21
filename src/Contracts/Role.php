@@ -1,6 +1,6 @@
 <?php
 
-namespace OWS\Workflow\Contracts;
+namespace Pitangent\Workflow\Contracts;
 
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
@@ -19,9 +19,9 @@ interface Role
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \OWS\Workflow\Contracts\Role
+     * @return \Pitangent\Workflow\Contracts\Role
      *
-     * @throws \OWS\Workflow\Exceptions\RoleDoesNotExist
+     * @throws \Pitangent\Workflow\Exceptions\RoleDoesNotExist
      */
     public static function findByName(string $name, $guardName): self;
 
@@ -31,9 +31,9 @@ interface Role
      * @param int $id
      * @param string|null $guardName
      *
-     * @return \OWS\Workflow\Contracts\Role
+     * @return \Pitangent\Workflow\Contracts\Role
      *
-     * @throws \OWS\Workflow\Exceptions\RoleDoesNotExist
+     * @throws \Pitangent\Workflow\Exceptions\RoleDoesNotExist
      */
     public static function findById(int $id, $guardName): self;
 
@@ -43,14 +43,14 @@ interface Role
      * @param string $name
      * @param string|null $guardName
      *
-     * @return \OWS\Workflow\Contracts\Role
+     * @return \Pitangent\Workflow\Contracts\Role
      */
     public static function findOrCreate(string $name, $guardName): self;
 
     /**
      * Determine if the user may perform the given permission.
      *
-     * @param string|\OWS\Workflow\Contracts\Permission $permission
+     * @param string|\Pitangent\Workflow\Contracts\Permission $permission
      *
      * @return bool
      */

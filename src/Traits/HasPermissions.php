@@ -1,17 +1,17 @@
 <?php
 
-namespace OWS\Workflow\Traits;
+namespace Pitangent\Workflow\Traits;
 
-use OWS\Workflow\Guard;
+use Pitangent\Workflow\Guard;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use OWS\Workflow\WildcardPermission;
-use OWS\Workflow\PermissionRegistrar;
-use OWS\Workflow\Contracts\Permission;
-use OWS\Workflow\Exceptions\GuardDoesNotMatch;
+use Pitangent\Workflow\WildcardPermission;
+use Pitangent\Workflow\PermissionRegistrar;
+use Pitangent\Workflow\Contracts\Permission;
+use Pitangent\Workflow\Exceptions\GuardDoesNotMatch;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
-use OWS\Workflow\Exceptions\PermissionDoesNotExist;
-use OWS\Workflow\Exceptions\WildcardPermissionInvalidArgument;
+use Pitangent\Workflow\Exceptions\PermissionDoesNotExist;
+use Pitangent\Workflow\Exceptions\WildcardPermissionInvalidArgument;
 
 trait HasPermissions
 {
@@ -55,7 +55,7 @@ trait HasPermissions
      * Scope the model query to certain permissions only.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
-     * @param string|array|\OWS\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Pitangent\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
@@ -80,7 +80,7 @@ trait HasPermissions
     }
 
     /**
-     * @param string|array|\OWS\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Pitangent\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return array
      */
@@ -104,7 +104,7 @@ trait HasPermissions
     /**
      * Determine if the model may perform the given permission.
      *
-     * @param string|int|\OWS\Workflow\Contracts\Permission $permission
+     * @param string|int|\Pitangent\Workflow\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -142,7 +142,7 @@ trait HasPermissions
     /**
      * Validates a wildcard permission against all permissions of a user.
      *
-     * @param string|int|\OWS\Workflow\Contracts\Permission $permission
+     * @param string|int|\Pitangent\Workflow\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -190,7 +190,7 @@ trait HasPermissions
     /**
      * An alias to hasPermissionTo(), but avoids throwing an exception.
      *
-     * @param string|int|\OWS\Workflow\Contracts\Permission $permission
+     * @param string|int|\Pitangent\Workflow\Contracts\Permission $permission
      * @param string|null $guardName
      *
      * @return bool
@@ -249,7 +249,7 @@ trait HasPermissions
     /**
      * Determine if the model has, via roles, the given permission.
      *
-     * @param \OWS\Workflow\Contracts\Permission $permission
+     * @param \Pitangent\Workflow\Contracts\Permission $permission
      *
      * @return bool
      */
@@ -261,7 +261,7 @@ trait HasPermissions
     /**
      * Determine if the model has the given permission.
      *
-     * @param string|int|\OWS\Workflow\Contracts\Permission $permission
+     * @param string|int|\Pitangent\Workflow\Contracts\Permission $permission
      *
      * @return bool
      * @throws PermissionDoesNotExist
@@ -314,7 +314,7 @@ trait HasPermissions
     /**
      * Grant the given permission(s) to a role.
      *
-     * @param string|array|\OWS\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Pitangent\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -367,7 +367,7 @@ trait HasPermissions
     /**
      * Remove all current permissions and set the given ones.
      *
-     * @param string|array|\OWS\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Pitangent\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
      * @return $this
      */
@@ -381,7 +381,7 @@ trait HasPermissions
     /**
      * Revoke the given permission.
      *
-     * @param \OWS\Workflow\Contracts\Permission|\OWS\Workflow\Contracts\Permission[]|string|string[] $permission
+     * @param \Pitangent\Workflow\Contracts\Permission|\Pitangent\Workflow\Contracts\Permission[]|string|string[] $permission
      *
      * @return $this
      */
@@ -402,9 +402,9 @@ trait HasPermissions
     }
 
     /**
-     * @param string|array|\OWS\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
+     * @param string|array|\Pitangent\Workflow\Contracts\Permission|\Illuminate\Support\Collection $permissions
      *
-     * @return \OWS\Workflow\Contracts\Permission|\OWS\Workflow\Contracts\Permission[]|\Illuminate\Support\Collection
+     * @return \Pitangent\Workflow\Contracts\Permission|\Pitangent\Workflow\Contracts\Permission[]|\Illuminate\Support\Collection
      */
     protected function getStoredPermission($permissions)
     {
@@ -429,9 +429,9 @@ trait HasPermissions
     }
 
     /**
-     * @param \OWS\Workflow\Contracts\Permission|\OWS\Workflow\Contracts\Role $roleOrPermission
+     * @param \Pitangent\Workflow\Contracts\Permission|\Pitangent\Workflow\Contracts\Role $roleOrPermission
      *
-     * @throws \OWS\Workflow\Exceptions\GuardDoesNotMatch
+     * @throws \Pitangent\Workflow\Exceptions\GuardDoesNotMatch
      */
     protected function ensureModelSharesGuard($roleOrPermission)
     {

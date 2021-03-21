@@ -1,8 +1,8 @@
 <?php
 
-namespace OWS\Workflow\Traits;
+namespace Pitangent\Workflow\Traits;
 
-use OWS\Workflow\PermissionRegistrar;
+use Pitangent\Workflow\PermissionRegistrar;
 
 trait RefreshesPermissionCache
 {

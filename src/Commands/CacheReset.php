@@ -1,9 +1,9 @@
 <?php
 
-namespace OWS\Workflow\Commands;
+namespace Pitangent\Workflow\Commands;
 
 use Illuminate\Console\Command;
-use OWS\Workflow\PermissionRegistrar;
+use Pitangent\Workflow\PermissionRegistrar;
 
 class CacheReset extends Command
 {

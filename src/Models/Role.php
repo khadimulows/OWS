@@ -1,15 +1,15 @@
 <?php
 
-namespace OWS\Workflow\Models;
+namespace Pitangent\Workflow\Models;
 
-use OWS\Workflow\Guard;
+use Pitangent\Workflow\Guard;
 use Illuminate\Database\Eloquent\Model;
-use OWS\Workflow\Traits\HasPermissions;
-use OWS\Workflow\Exceptions\RoleDoesNotExist;
-use OWS\Workflow\Exceptions\GuardDoesNotMatch;
-use OWS\Workflow\Exceptions\RoleAlreadyExists;
-use OWS\Workflow\Contracts\Role as RoleContract;
-use OWS\Workflow\Traits\RefreshesPermissionCache;
+use Pitangent\Workflow\Traits\HasPermissions;
+use Pitangent\Workflow\Exceptions\RoleDoesNotExist;
+use Pitangent\Workflow\Exceptions\GuardDoesNotMatch;
+use Pitangent\Workflow\Exceptions\RoleAlreadyExists;
+use Pitangent\Workflow\Contracts\Role as RoleContract;
+use Pitangent\Workflow\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
