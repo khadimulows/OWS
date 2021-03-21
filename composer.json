@@ -32,8 +32,7 @@
         "laravel": {
             "providers": [
                 "OWS\\Workflow\\WorkflowServiceProvider",
-                "OWS\\Workflow\\\\PermissionServiceProvider"
-
+                "OWS\\Workflow\\PermissionServiceProvider"
             ],
             "aliases": {
                 "Workflow": "OWS\\Workflow\\Facades\\Workflow"

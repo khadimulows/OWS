@@ -22,6 +22,10 @@ class WorkflowServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
         }
+
+        $this->commands([
+            Commands\TraitMakeCommand::class
+        ]);
     }
 
     /**
