@@ -1,5 +1,5 @@
 {
-    "name": "ows/workflow",
+    "name": "openweb/workflow",
     "description": "I've created this package to maintaining our code stability on Laravel",
     "license": "MIT",
     "authors": [
