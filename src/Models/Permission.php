@@ -4,11 +4,11 @@ namespace Pitangent\Workflow\Models;
 
 use Pitangent\Workflow\Guard;
 use Illuminate\Support\Collection;
-use Pitangent\Workflow\Traits\HasRoles;
 use Illuminate\Database\Eloquent\Model;
+use Pitangent\Workflow\Traits\HasRoles;
 use Pitangent\Workflow\PermissionRegistrar;
-use Pitangent\Workflow\Traits\RefreshesPermissionCache;
 use Illuminate\Database\Eloquent\Relations\MorphToMany;
+use Pitangent\Workflow\Traits\RefreshesPermissionCache;
 use Pitangent\Workflow\Exceptions\PermissionDoesNotExist;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Pitangent\Workflow\Exceptions\PermissionAlreadyExists;

@@ -10,10 +10,10 @@ return [
          * is often just the "Permission" model but you may use whatever you like.
          *
          * The model you want to use as a Permission model needs to implement the
-         * `OWS\Workflow\Contracts\Permission` contract.
+         * `Pitangent\Workflow\Contracts\Permission` contract.
          */
 
-        'permission' => OWS\Workflow\Models\Permission::class,
+        'permission' => Pitangent\Workflow\Models\Permission::class,
 
         /*
          * When using the "HasRoles" trait from this package, we need to know which
@@ -21,10 +21,10 @@ return [
          * is often just the "Role" model but you may use whatever you like.
          *
          * The model you want to use as a Role model needs to implement the
-         * `OWS\Workflow\Contracts\Role` contract.
+         * `Pitangent\Workflow\Contracts\Role` contract.
          */
 
-        'role' => OWS\Workflow\Models\Role::class,
+        'role' => Pitangent\Workflow\Models\Role::class,
 
     ],
 

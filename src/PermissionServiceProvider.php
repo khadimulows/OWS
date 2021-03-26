@@ -5,10 +5,10 @@ namespace Pitangent\Workflow;
 use Illuminate\Routing\Route;
 use Illuminate\Support\Collection;
 use Illuminate\Filesystem\Filesystem;
+use Pitangent\Workflow\Contracts\Role;
 use Illuminate\Support\ServiceProvider;
+use Pitangent\Workflow\Contracts\Permission;
 use Illuminate\View\Compilers\BladeCompiler;
-use Pitangent\Workflow\Contracts\Role as RoleContract;
-use Pitangent\Workflow\Contracts\Permission as PermissionContract;
 
 class PermissionServiceProvider extends ServiceProvider
 {
@@ -61,8 +61,8 @@ class PermissionServiceProvider extends ServiceProvider
             return;
         }
 
-        $this->app->bind(PermissionContract::class, $config['permission']);
-        $this->app->bind(RoleContract::class, $config['role']);
+        $this->app->bind(Permission::class, $config['permission']);
+        $this->app->bind(Role::class, $config['role']);
     }
 
     protected function registerBladeExtensions()
