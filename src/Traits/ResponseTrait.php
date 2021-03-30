@@ -1,6 +1,8 @@
 <?php
 namespace Pitangent\Workflow\Traits;
 
+use Illuminate\Http\JsonResponse;
+
 trait ResponseTrait
 {
     protected $message;
@@ -9,10 +11,10 @@ trait ResponseTrait
     | @param mixed $data
     | @param boolean $success
     | @param status $status
-    | @return \Illuminate\Http\Response
+    | @return \Illuminate\Http\JsonResponse
     |-------------------------------------
     */
-    protected function response($data, $success = true, $status = 200){
+    protected function response($data, $success = true, $status = 200) : JsonResponse {
         return response()->json([
             'status' => $status,
             'success' => $success,
@@ -24,10 +26,10 @@ trait ResponseTrait
     |-------------------------------------
     | @param mixed $messages
     | @param status $status
-    | @return \Illuminate\Http\Response
+    | @return \Illuminate\Http\JsonResponse
     |-------------------------------------
     */
-    protected function responseMessages($messages, $status = 400){
+    protected function responseMessages($messages, $status = 400) : JsonResponse {
         return response()->json([
             'status' => $status,
             'success' => false,

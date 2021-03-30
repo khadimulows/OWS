@@ -2,10 +2,11 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Pitangent\Workflow\Http\Controllers\RestController;
 
-class {{ class }} extends Controller
+class {{ class }} extends RestController 
 {
-    //
+
 }

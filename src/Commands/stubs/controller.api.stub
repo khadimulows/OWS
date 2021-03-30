@@ -2,63 +2,98 @@
 
 namespace {{ namespace }};
 
-use {{ rootNamespace }}Http\Controllers\Controller;
+use {{ namespacedModel }};
 use Illuminate\Http\Request;
+use Illuminate\Http\JsonResponse;
+use Pitangent\Workflow\Http\Controllers\RestController;
 
-class {{ class }} extends Controller
+class {{ class }} extends RestController 
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Get all {{ modelVariable }}s
+    |-------------------------------------------------------------------------------
+    | URL:              /api/{{{ model }}}s
+    | Method:           GET
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function getList( Request $request ) : JsonResponse
     {
-        //
+        ${{ modelVariable }}s = {{{ model }}}::all();
+        return $this->response( ${{ modelVariable }}s );
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    /*
+    |-------------------------------------------------------------------------------
+    | Get {{ modelVariable }} By id
+    |-------------------------------------------------------------------------------
+    | URL:              /api/{{{ model }}}s/{id}
+    | Method:           GET
+    | @param $id        int
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function getById( int $id, Request $request ) : JsonResponse
     {
-        //
+        $with = $request->get( 'with', [] );
+        ${{ modelVariable }} = {{{ model }}}::with($with)->findOrFail( $id );
+        return $this->response( ${{ modelVariable }} );
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    /*
+    |-------------------------------------------------------------------------------
+    | Create a new {{ modelVariable }}
+    |-------------------------------------------------------------------------------
+    | URL:              /api/{{{ model }}}s
+    | Method:           POST
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function create( Request $request ) : JsonResponse
     {
-        //
+        ${{ modelVariable }} = {{{ model }}}::create( $request->all() );
+        return $this->response( ${{ modelVariable }} );
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    /*
+    |-------------------------------------------------------------------------------
+    | Create a new {{ modelVariable }}
+    |-------------------------------------------------------------------------------
+    | URL:              /api/{{{ model }}}s/{id}
+    | Method:           PATCH
+    | @param $id        int
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function updateById( int $id, Request $request ) : JsonResponse
     {
-        //
+        ${{ modelVariable }} = {{{ model }}}::findOrFail( $id );
+        ${{ modelVariable }} = ${{ modelVariable }}->update( $request->all() );
+
+        return $this->response( ${{ modelVariable }} );
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
+    /*
+    |-------------------------------------------------------------------------------
+    | Create a new {{ modelVariable }}
+    |-------------------------------------------------------------------------------
+    | URL:              /api/{{{ model }}}s/{id}
+    | Method:           DELETE
+    | @param $id        int
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function deleteById( int $id, Request $request ) : JsonResponse
     {
-        //
+        ${{ modelVariable }} = {{{ model }}}::findOrFail( $id );
+
+        if($request->get('archive') == 1)
+            ${{ modelVariable }}->delete();
+        else
+            ${{ modelVariable }}->forceDelete();
+
+        return $this->response( ${{ modelVariable }} );
     }
 }
