@@ -88,7 +88,13 @@ class {{ class }} extends RestController
     */
     public function create( Request $request ) : JsonResponse
     {
-        ${{ modelVariable }} = {{ model }}::create( $request->all() );
+        $params = $request->all();
+        $validation = Validator::make( $params, {{ model }}::CREATE_VALIDATIONS );
+
+        if( $validation->fails() )
+            return $this->responseMessages( $validation->errors() );
+        
+        ${{ modelVariable }} = {{ model }}::create(  $params );
         return $this->response( ${{ modelVariable }} );
     }
 
@@ -104,8 +110,14 @@ class {{ class }} extends RestController
     */
     public function updateById( int $id, Request $request ) : JsonResponse
     {
+        $params = $request->all();
+        $validation = Validator::make( $params, {{ model }}::CREATE_VALIDATIONS );
+
+        if( $validation->fails() )
+            return $this->responseMessages( $validation->errors() );
+        
         ${{ modelVariable }} = {{ model }}::findOrFail( $id );
-        ${{ modelVariable }} = ${{ modelVariable }}->update( $request->all() );
+        ${{ modelVariable }} = ${{ modelVariable }}->update( $params );
 
         return $this->response( ${{ modelVariable }} );
     }
