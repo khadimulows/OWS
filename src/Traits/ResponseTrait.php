@@ -2,6 +2,7 @@
 namespace Pitangent\Workflow\Traits;
 
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\Response;
 
 trait ResponseTrait
 {
@@ -14,7 +15,7 @@ trait ResponseTrait
     | @return \Illuminate\Http\JsonResponse
     |-------------------------------------
     */
-    protected function response($data, $success = true, $status = 200) : JsonResponse {
+    protected function response( $data, $success = true, $status = Response::HTTP_OK ) : JsonResponse {
         return response()->json([
             'status' => $status,
             'success' => $success,
@@ -29,7 +30,7 @@ trait ResponseTrait
     | @return \Illuminate\Http\JsonResponse
     |-------------------------------------
     */
-    protected function responseMessages($messages, $status = 400) : JsonResponse {
+    protected function responseMessages( $messages, $status = Response::HTTP_BAD_REQUEST ) : JsonResponse {
         return response()->json([
             'status' => $status,
             'success' => false,
@@ -38,7 +39,7 @@ trait ResponseTrait
         ], $status);
     }
 
-    public function forceResponse($data = [], $status=200){
+    public function forceResponse( $data = [], $status = Response::HTTP_OK ) {
     	ob_end_clean();
         header("Connection: close\r\n");
         header("Content-Encoding: none\r\n");

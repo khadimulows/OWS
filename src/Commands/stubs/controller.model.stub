@@ -4,6 +4,7 @@ namespace {{ namespace }};
 
 use {{ namespacedModel }};
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Pitangent\Workflow\Http\Controllers\RestController;
 
@@ -12,24 +13,58 @@ class {{ class }} extends RestController
 
     /*
     |-------------------------------------------------------------------------------
-    | Get all {{ modelVariable }}s
+    | Get all photos
     |-------------------------------------------------------------------------------
-    | URL:              /api/{{ model }}s
+    | URL:              /api/{{ modelVariable }}s
     | Method:           GET
     | @param $request   Illuminate\Http\Request
     | @return           Illuminate\Http\JsonResponse
     */
     public function getList( Request $request ) : JsonResponse
     {
-        ${{ modelVariable }}s = {{ model }}::all();
-        return $this->response( ${{ modelVariable }}s );
+        $query = $request->get('q', '');
+        $with = $request->get('with', []);
+        $pageNo = $request->get('page', 0);
+        $limit = $request->get('limit', 10);
+        $active = $request->get('active', 'id');
+        $direction = $request->get('direction', 'DESC');
+        $skip = ($pageNo - 1) * $limit;
+
+        ${{ modelVariable }}s = {{ model }}::with( $with );
+        $hasItems = ${{ modelVariable }}s->count();
+  
+        if ( $query ) {
+            ${{ modelVariable }}s = ${{ modelVariable }}s->where( function($q )  use ($query) { 
+                foreach( {{ model }}::FILTER_KEYS as $index => $key ){
+                    if( $index == 0 )
+                        $q = $q->where( $key, 'like', '%' . $query . '%' );
+                    else
+                        $q = $q->orWhere( $key, 'like', '%' . $query . '%' );
+                }
+            });
+        }
+
+        ${{ modelVariable }}s = ${{ modelVariable }}s->orderBy( $active, $direction );
+
+        $total = ${{ modelVariable }}s->count();
+
+        if($limit)
+            ${{ modelVariable }}s = ${{ modelVariable }}s->take( $limit )->skip( $skip )->get();
+        else
+            ${{ modelVariable }}s = ${{ modelVariable }}s->get();
+
+        return $this->response([
+            'items' => ${{ modelVariable }}s, 
+            'total' => $total,
+            'hasItems' => $hasItems > 0
+        ]);
     }
 
     /*
     |-------------------------------------------------------------------------------
     | Get {{ modelVariable }} By id
     |-------------------------------------------------------------------------------
-    | URL:              /api/{{ model }}s/{id}
+    | URL:              /api/{{ modelVariable }}s/{id}
     | Method:           GET
     | @param $id        int
     | @param $request   Illuminate\Http\Request
@@ -46,7 +81,7 @@ class {{ class }} extends RestController
     |-------------------------------------------------------------------------------
     | Create a new {{ modelVariable }}
     |-------------------------------------------------------------------------------
-    | URL:              /api/{{ model }}s
+    | URL:              /api/{{ modelVariable }}s
     | Method:           POST
     | @param $request   Illuminate\Http\Request
     | @return           Illuminate\Http\JsonResponse
@@ -61,7 +96,7 @@ class {{ class }} extends RestController
     |-------------------------------------------------------------------------------
     | Create a new {{ modelVariable }}
     |-------------------------------------------------------------------------------
-    | URL:              /api/{{ model }}s/{id}
+    | URL:              /api/{{ modelVariable }}s/{id}
     | Method:           PATCH
     | @param $id        int
     | @param $request   Illuminate\Http\Request
@@ -79,7 +114,7 @@ class {{ class }} extends RestController
     |-------------------------------------------------------------------------------
     | Create a new {{ modelVariable }}
     |-------------------------------------------------------------------------------
-    | URL:              /api/{{ model }}s/{id}
+    | URL:              /api/{{ modelVariable }}s/{id}
     | Method:           DELETE
     | @param $id        int
     | @param $request   Illuminate\Http\Request
@@ -89,7 +124,7 @@ class {{ class }} extends RestController
     {
         ${{ modelVariable }} = {{ model }}::findOrFail( $id );
 
-        if($request->get('archive') == 1)
+        if( $request->get('archive') == 1 )
             ${{ modelVariable }}->delete();
         else
             ${{ modelVariable }}->forceDelete();

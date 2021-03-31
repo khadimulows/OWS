@@ -12,10 +12,14 @@ This is where your description should go. Take a look at [contributing.md](contr
 Via Composer
 
 ``` bash
-$ composer require ows/workflow
+$ composer require pitangent/workflow
 ```
 
 ## Usage
+``` bash
+$ php artisan pitangent:controller --model={{MODEL_NAME}}
+```
+
 
 ## Change log
 
