@@ -21,7 +21,7 @@ class BaseModel extends Model
      */
     CONST UPDATE_VALIDATIONS = [];
 
-    public function getId(){
-        $this->{$this->primaryKey};
+    public function getId() : int {
+        return $this->{$this->primaryKey};
     }
 }
