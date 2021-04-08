@@ -15,6 +15,14 @@ Via Composer
 $ composer require pitangent/workflow
 ```
 
+``` bash
+Pitangent\Workflow\PermissionServiceProvider::class,
+```
+
+``` bash
+Pitangent\Workflow\WorkflowServiceProvider::class
+```
+
 ## Usage
 ``` bash
 $ php artisan pitangent:controller --model={{MODEL_NAME}}

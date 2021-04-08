@@ -88,7 +88,15 @@ class {{ class }} extends RestController
     */
     public function create( Request $request ) : JsonResponse
     {
-        ${{ modelVariable }} = {{ model }}::create( $request->all() );
+        $params = $request->all();
+        $validation = Validator::make( $params, {{ model }}::CREATE_VALIDATIONS );
+
+        if( $validation->fails() )
+            return $this->responseMessages( $validation->errors() );
+        
+        ${{ modelVariable }} = {{ model }}::create(  $params );
+
+        $this->message = 'Successfully Created';
         return $this->response( ${{ modelVariable }} );
     }
 
@@ -104,9 +112,15 @@ class {{ class }} extends RestController
     */
     public function updateById( int $id, Request $request ) : JsonResponse
     {
-        ${{ modelVariable }} = {{ model }}::findOrFail( $id );
-        ${{ modelVariable }} = ${{ modelVariable }}->update( $request->all() );
+        $params = $request->all();
+        $validation = Validator::make( $params, {{ model }}::UPDATE_VALIDATIONS );
 
+        if( $validation->fails() )
+            return $this->responseMessages( $validation->errors() );
+        
+        ${{ modelVariable }} = {{ model }}::findOrFail( $id );
+        ${{ modelVariable }} = ${{ modelVariable }}->update( $params );
+        $this->message = 'Successfully Updated';
         return $this->response( ${{ modelVariable }} );
     }
 
@@ -128,7 +142,7 @@ class {{ class }} extends RestController
             ${{ modelVariable }}->delete();
         else
             ${{ modelVariable }}->forceDelete();
-
+        $this->message = 'Successfully Deleted';
         return $this->response( ${{ modelVariable }} );
     }
 }
