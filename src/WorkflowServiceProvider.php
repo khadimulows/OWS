@@ -25,7 +25,8 @@ class WorkflowServiceProvider extends ServiceProvider
 
         $this->commands([
             Commands\TraitMakeCommand::class,
-            Commands\ControllerMakeCommand::class
+            Commands\ControllerMakeCommand::class,
+            Commands\ModelMakeCommand::class
         ]);
     }
 
@@ -65,23 +66,5 @@ class WorkflowServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/../config/workflow.php' => config_path('workflow.php'),
         ], 'workflow.config');
-
-        // Publishing the views.
-        /*$this->publishes([
-            __DIR__.'/../resources/views' => base_path('resources/views/vendor/ows'),
-        ], 'workflow.views');*/
-
-        // Publishing assets.
-        /*$this->publishes([
-            __DIR__.'/../resources/assets' => public_path('vendor/ows'),
-        ], 'workflow.views');*/
-
-        // Publishing the translation files.
-        /*$this->publishes([
-            __DIR__.'/../resources/lang' => resource_path('lang/vendor/ows'),
-        ], 'workflow.views');*/
-
-        // Registering package commands.
-        // $this->commands([]);
     }
 }

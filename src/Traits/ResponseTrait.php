@@ -11,7 +11,7 @@ trait ResponseTrait
     |-------------------------------------
     | @param mixed $data
     | @param boolean $success
-    | @param status $status
+    | @param int $status
     | @return \Illuminate\Http\JsonResponse
     |-------------------------------------
     */
@@ -23,10 +23,11 @@ trait ResponseTrait
             'data' => $data
         ], $status);
     }
+
     /*
     |-------------------------------------
     | @param mixed $messages
-    | @param status $status
+    | @param int $status
     | @return \Illuminate\Http\JsonResponse
     |-------------------------------------
     */
@@ -39,7 +40,13 @@ trait ResponseTrait
         ], $status);
     }
 
-    public function forceResponse( $data = [], $status = Response::HTTP_OK ) {
+    /*
+    |-------------------------------------
+    | @param mixed $messages
+    | @param int $status
+    |-------------------------------------
+    */
+    public function forceResponse( $data = [], $status = Response::HTTP_OK ) : Void  {
     	ob_end_clean();
         header("Connection: close\r\n");
         header("Content-Encoding: none\r\n");
