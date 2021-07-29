@@ -1,0 +1,11 @@
+<?php
+
+namespace {{ namespace }};
+
+use Pitangent\Workflow\Models\BaseModel;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+
+class {{ class }} extends BaseModel
+{
+    use HasFactory;
+}
