@@ -12,16 +12,17 @@
     "homepage": "https://github.com/ows/workflow",
     "keywords": ["Laravel", "Workflow"],
     "require": {
-        "php": "^7.2|^8.0"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "~9.0",
-        "orchestra/testbench": "~6",
+        "php": "^7.2|^8.0",
         "illuminate/support": "~6|~7|~8",
         "illuminate/auth": "~6|~7|~8",
         "illuminate/container": "~6|~7|~8",
         "illuminate/contracts": "~6|~7|~8",
         "illuminate/database": "~6|~7|~8"
+    },
+    "require-dev": {
+        "predis/predis": "^1.1",
+        "phpunit/phpunit": "~9.0",
+        "orchestra/testbench": "~6"
     },
     "autoload": {
         "psr-4": {

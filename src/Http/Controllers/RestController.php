@@ -8,14 +8,15 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Pitangent\Workflow\Traits\ResponseTrait;
 use Illuminate\Foundation\Bus\DispatchesJobs;
+use Pitangent\Workflow\Contracts\RestController as RestContract;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
-abstract class RestController extends Controller
+abstract class RestController extends Controller implements RestContract
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ResponseTrait;
-    
-    /** @var \Illuminate\Support\Facades\Auth */
+
+    /** @var user \Illuminate\Support\Facades\Auth */
     protected $user;
 
     public function __construct()

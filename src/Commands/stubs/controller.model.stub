@@ -6,9 +6,10 @@ use {{ namespacedModel }};
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Validator;
 use Pitangent\Workflow\Http\Controllers\RestController;
 
-class {{ class }} extends RestController 
+class {{ class }} extends RestController
 {
 
     /*
@@ -32,9 +33,9 @@ class {{ class }} extends RestController
 
         ${{ modelVariable }}s = {{ model }}::with( $with );
         $hasItems = ${{ modelVariable }}s->count();
-  
+
         if ( $query ) {
-            ${{ modelVariable }}s = ${{ modelVariable }}s->where( function($q )  use ($query) { 
+            ${{ modelVariable }}s = ${{ modelVariable }}s->where( function($q )  use ($query) {
                 foreach( {{ model }}::FILTER_KEYS as $index => $key ){
                     if( $index == 0 )
                         $q = $q->where( $key, 'like', '%' . $query . '%' );
@@ -54,7 +55,7 @@ class {{ class }} extends RestController
             ${{ modelVariable }}s = ${{ modelVariable }}s->get();
 
         return $this->response([
-            'items' => ${{ modelVariable }}s, 
+            'items' => ${{ modelVariable }}s,
             'total' => $total,
             'hasItems' => $hasItems > 0
         ]);
@@ -93,7 +94,7 @@ class {{ class }} extends RestController
 
         if( $validation->fails() )
             return $this->responseMessages( $validation->errors() );
-        
+
         ${{ modelVariable }} = {{ model }}::create(  $params );
 
         $this->message = 'Successfully Created';
@@ -117,7 +118,7 @@ class {{ class }} extends RestController
 
         if( $validation->fails() )
             return $this->responseMessages( $validation->errors() );
-        
+
         ${{ modelVariable }} = {{ model }}::findOrFail( $id );
         ${{ modelVariable }} = ${{ modelVariable }}->update( $params );
         $this->message = 'Successfully Updated';

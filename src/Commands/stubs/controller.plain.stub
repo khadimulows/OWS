@@ -4,9 +4,9 @@ namespace {{ namespace }};
 
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
-use Pitangent\Workflow\Http\Controllers\RestController;
+use Pitangent\Workflow\Http\Controllers\BaseController;
 
-class {{ class }} extends RestController 
+class {{ class }} extends BaseController
 {
 
 }

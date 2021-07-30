@@ -70,7 +70,10 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        return $rootNamespace.'\Http\Controllers';
+        if ($this->option('api'))
+            return $rootNamespace.'\Http\Controllers\API';
+        else
+            return $rootNamespace.'\Http\Controllers';
     }
 
     /**
@@ -109,7 +112,7 @@ class ControllerMakeCommand extends GeneratorCommand
 
         if (! class_exists($parentModelClass)) {
             if ($this->confirm("A {$parentModelClass} model does not exist. Do you want to generate it?", true)) {
-                $this->call('make:model', ['name' => $parentModelClass]);
+                $this->call('pitangent:model', ['name' => $parentModelClass]);
             }
         }
 
