@@ -4,7 +4,7 @@ namespace Pitangent\Workflow\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class BaseModel extends Model
+abstract class BaseModel extends Model
 {
     /**
      * @var FILTER_KEYS array

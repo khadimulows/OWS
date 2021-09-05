@@ -8,5 +8,9 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class {{ class }} extends BaseModel
 {
+    const FILTER_KEYS = [];
 
+    const CREATE_VALIDATIONS = [];
+
+    const UPDATE_VALIDATIONS = [];
 }

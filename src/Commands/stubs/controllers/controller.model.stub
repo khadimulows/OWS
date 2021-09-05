@@ -14,7 +14,7 @@ class {{ class }} extends RestController
 
     /*
     |-------------------------------------------------------------------------------
-    | Get all photos
+    | Get all {{ modelVariable }}s
     |-------------------------------------------------------------------------------
     | URL:              /api/{{ modelVariable }}s
     | Method:           GET
@@ -98,7 +98,7 @@ class {{ class }} extends RestController
         ${{ modelVariable }} = {{ model }}::create(  $params );
 
         $this->message = 'Successfully Created';
-        return $this->response( ${{ modelVariable }} );
+        return $this->response( ${{ modelVariable }}, TRUE, Response::HTTP_CREATED );
     }
 
     /*

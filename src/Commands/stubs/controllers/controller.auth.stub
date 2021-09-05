@@ -1,0 +1,153 @@
+<?php
+
+namespace {{ namespace }};
+
+use {{ namespacedModel }};
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Http\JsonResponse;
+use Tymon\JWTAuth\Facades\JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Validator;
+use Pitangent\Workflow\Http\Controllers\AuthRestController;
+
+class {{ class }} extends AuthRestController
+{
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Login a {{ modelVariable }}
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/login
+    | Method:           POST
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function authenticate(Request $request) : JsonResponse
+    {
+        try {
+            $rules = [
+                'email' => 'required|email',
+                'password' => 'required'
+            ];
+            $validator = Validator::make( $request->all(), $rules );
+
+            if( $validator->fails() )
+                return $this->responseMessages( $validator->errors() );
+
+            $credentials = $request->only( 'email', 'password' );
+
+            if ( !$token = JWTAuth::attempt( $credentials ) ) {
+                $this->message = 'Invalid credentials';
+                return $this->response( NULL, FALSE, Response::HTTP_BAD_REQUEST );
+            }
+
+            $this->user = auth()->user();
+
+            return $this->response( [ "user" => $this->user, "token" => $token ] );
+        } catch (JWTException $e) {
+            $this->message = 'Could not create token';
+            return $this->response( NULL, FALSE, Response::HTTP_INTERNAL_SERVER_ERROR );
+        }
+    }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Register a {{ modelVariable }}
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/register
+    | Method:           POST
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function register( Request $request ) : JsonResponse
+    {
+        $params = $request->all();
+        $validation = Validator::make( $params, {{ model }}::CREATE_VALIDATIONS );
+
+        if( $validation->fails() )
+            return $this->responseMessages( $validation->errors() );
+
+        ${{ modelVariable }} = {{ model }}::create(  $params );
+
+        $this->message = 'Successfully Register';
+        return $this->response( ${{ modelVariable }}, TRUE, Response::HTTP_CREATED );
+    }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Get authenticate user
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/me
+    | Method:           GET
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function me( Request $request ) : JsonResponse
+    {
+        ${{ modelVariable }} = auth()->user();
+
+        return $this->response( ${{ modelVariable }} );
+    }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Request authenticated user password
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/password/request
+    | Method:           GET
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function requestPassword( Request $request ) : JsonResponse
+    {
+        $rules = [
+            'email' => 'required|email',
+        ];
+        $validator = Validator::make( $request->all(), $rules );
+
+        if( $validator->fails() )
+            return $this->responseMessages( $validator->errors() );
+
+        $use = $request->get( 'email' );
+
+        {{ model }}::where()->firstOrfail()
+        if ( !$token = JWTAuth::attempt( $credentials ) ) {
+            $this->message = 'Invalid credentials';
+            return $this->response( NULL, FALSE, Response::HTTP_BAD_REQUEST );
+        }
+
+        $this->user = auth()->user();
+
+        return $this->response( [ "user" => $this->user, "token" => $token ] );
+    }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Reset authenticated user password
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/password/reset
+    | Method:           GET
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function resetPassword( Request $request ) : JsonResponse
+    {
+
+    }
+
+    /*
+    |-------------------------------------------------------------------------------
+    | Change authenticated user password
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/password/change
+    | Method:           Post
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function changePassword( Request $request ) : JsonResponse
+    {
+
+    }
+
+}

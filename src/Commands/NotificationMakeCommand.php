@@ -6,28 +6,28 @@ use InvalidArgumentException;
 use Illuminate\Console\GeneratorCommand;
 use Symfony\Component\Console\Input\InputOption;
 
-class ControllerMakeCommand extends GeneratorCommand
+class NotificationMakeCommand extends GeneratorCommand
 {
     /**
      * The console command name.
      *
      * @var string
      */
-    protected $name = 'pitangent:controller';
+    protected $name = 'pitangent:notification';
 
     /**
      * The console command description.
      *
      * @var string
      */
-    protected $description = 'Create a new controller class';
+    protected $description = 'Create a new notification class';
 
     /**
      * The type of class being generated.
      *
      * @var string
      */
-    protected $type = 'Controller';
+    protected $type = 'Notification';
 
     /**
      * Get the stub file for the generator.
@@ -38,15 +38,11 @@ class ControllerMakeCommand extends GeneratorCommand
     {
         $stub = null;
 
-        if($this->option('auth')) {
-            $stub = '/stubs/controllers/controller.auth.stub';
-        } elseif ($this->option('api')) {
-            $stub = '/stubs/controllers/controller.api.stub';
-        } elseif ($this->option('model')) {
-            $stub = '/stubs/controllers/controller.model.stub';
+        if ($this->option('model')) {
+            $stub = '/stubs/notifications/notification.model.stub';
         }
 
-        $stub = $stub ?? '/stubs/controllers/controller.plain.stub';
+        $stub = $stub ?? '/stubs/notifications/notification.plain.stub';
 
         return $this->resolveStubPath($stub);
     }
@@ -72,10 +68,7 @@ class ControllerMakeCommand extends GeneratorCommand
      */
     protected function getDefaultNamespace($rootNamespace)
     {
-        if ($this->option('api'))
-            return $rootNamespace.'\Http\Controllers\API';
-        else
-            return $rootNamespace.'\Http\Controllers';
+        return $rootNamespace.'\Notifications';
     }
 
     /**
@@ -196,8 +189,6 @@ class ControllerMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
-            ['api', null, InputOption::VALUE_NONE, 'Exclude the create and edit methods from the controller.'],
-            ['auth', null, InputOption::VALUE_NONE, 'Exclude the auth related methods the controller.'],
             ['model', 'm', InputOption::VALUE_OPTIONAL, 'Generate a resource controller for the given model.'],
         ];
     }

@@ -26,7 +26,9 @@ class WorkflowServiceProvider extends ServiceProvider
         $this->commands([
             Commands\TraitMakeCommand::class,
             Commands\ControllerMakeCommand::class,
-            Commands\ModelMakeCommand::class
+            Commands\ModelMakeCommand::class,
+            Commands\AuthMakeCommand::class,
+            Commands\NotificationMakeCommand::class
         ]);
     }
 

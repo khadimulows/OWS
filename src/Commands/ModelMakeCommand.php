@@ -9,6 +9,13 @@ use Symfony\Component\Console\Input\InputOption;
 class ModelMakeCommand extends GeneratorCommand
 {
     /**
+     * Store the command API or WEB.
+     *
+     * @var string
+     */
+    protected $isApi = false;
+
+    /**
      * The console command name.
      *
      * @var string
@@ -36,6 +43,8 @@ class ModelMakeCommand extends GeneratorCommand
      */
     public function handle()
     {
+        $this->isApi = $this->option('api') ? true :  true;
+
         if (parent::handle() === false && ! $this->option('force')) {
             return false;
         }
@@ -124,11 +133,15 @@ class ModelMakeCommand extends GeneratorCommand
 
         $modelName = $this->qualifyClass($this->getNameInput());
 
-        $this->call('pitangent:controller', array_filter([
+        $options = [
             'name' => "{$controller}Controller",
             '--model' => $this->option('resource') || $this->option('api') ? $modelName : null,
-            '--api' => $this->option('api'),
-        ]));
+        ];
+
+        if($this->isApi)
+            $options['--api'] = $this->isApi;
+
+        $this->call('pitangent:controller', array_filter($options));
     }
 
     /**
@@ -138,9 +151,17 @@ class ModelMakeCommand extends GeneratorCommand
      */
     protected function getStub()
     {
-        return $this->option('pivot')
-                    ? $this->resolveStubPath('/stubs/model.pivot.stub')
-                    : $this->resolveStubPath('/stubs/model.stub');
+
+        $stub = null;
+
+        if( $this->option('auth') ) {
+            $stub = '/stubs/models/model.auth.stub';
+        } elseif ( $this->option('pivot') ) {
+            $stub = '/stubs/models/model.pivot.stub';
+        }
+
+        $stub = $stub ?? '/stubs/models/model.stub';
+        return $this->resolveStubPath($stub);
     }
 
     /**
@@ -175,6 +196,7 @@ class ModelMakeCommand extends GeneratorCommand
     protected function getOptions()
     {
         return [
+            ['auth', null, InputOption::VALUE_NONE, 'Generate a authenticable model for the auth'],
             ['all', 'a', InputOption::VALUE_NONE, 'Generate a migration, seeder, factory, and resource controller for the model'],
             ['controller', 'c', InputOption::VALUE_NONE, 'Create a new controller for the model'],
             ['factory', 'f', InputOption::VALUE_NONE, 'Create a new factory for the model'],
