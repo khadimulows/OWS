@@ -27,7 +27,7 @@ class AuthMakeCommand extends Command
      *
      * @var string
      */
-    protected $description = 'Create a new Eloquent model class';
+    protected $description = 'Create auth relates classs';
 
     /**
      * The type of class being generated.
