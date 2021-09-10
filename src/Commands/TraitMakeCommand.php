@@ -10,7 +10,7 @@ class TraitMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'pitangent:trait';
+    protected $name = 'pats:trait';
     /**
      * The console command description.
      *

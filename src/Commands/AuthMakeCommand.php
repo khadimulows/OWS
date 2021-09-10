@@ -51,7 +51,7 @@ class AuthMakeCommand extends Command
             $params['--api'] = true;
         }
 
-        $this->call('pitangent:controller', $params);
+        $this->call('pats:controller', $params);
     }
 
     /**

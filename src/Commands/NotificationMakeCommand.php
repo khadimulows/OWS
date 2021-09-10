@@ -4,6 +4,7 @@ namespace Pitangent\Workflow\Commands;
 
 use InvalidArgumentException;
 use Illuminate\Console\GeneratorCommand;
+use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class NotificationMakeCommand extends GeneratorCommand
@@ -13,7 +14,7 @@ class NotificationMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'pitangent:notification';
+    protected $name = 'pats:notification';
 
     /**
      * The console command description.
@@ -28,6 +29,22 @@ class NotificationMakeCommand extends GeneratorCommand
      * @var string
      */
     protected $type = 'Notification';
+
+
+    /**
+     * Execute the console command.
+     *
+     * @return void
+     */
+    public function handle()
+    {
+
+
+        dd ( __DIR__ ,resource_path(), $this->laravel->basePath(),5);
+        if (parent::handle() === false) {
+            return false;
+        }
+    }
 
     /**
      * Get the stub file for the generator.
@@ -126,6 +143,8 @@ class NotificationMakeCommand extends GeneratorCommand
             'ParentDummyModelVariable' => lcfirst(class_basename($parentModelClass)),
             '{{ parentModelVariable }}' => lcfirst(class_basename($parentModelClass)),
             '{{parentModelVariable}}' => lcfirst(class_basename($parentModelClass)),
+            '{{ fileName }}'=> Str::lower($this->arguments()['name']),
+            '{{fileName}}'=> Str::lower($this->arguments()['name'])
         ];
     }
 
@@ -161,6 +180,8 @@ class NotificationMakeCommand extends GeneratorCommand
             'DummyModelVariable' => lcfirst(class_basename($modelClass)),
             '{{ modelVariable }}' => lcfirst(class_basename($modelClass)),
             '{{modelVariable}}' => lcfirst(class_basename($modelClass)),
+            '{{ fileName }}'=> Str::lower($this->arguments()['name']),
+            '{{fileName}}'=> Str::lower($this->arguments()['name'])
         ]);
     }
 

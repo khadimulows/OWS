@@ -13,7 +13,7 @@ class ControllerMakeCommand extends GeneratorCommand
      *
      * @var string
      */
-    protected $name = 'pitangent:controller';
+    protected $name = 'pats:controller';
 
     /**
      * The console command description.
@@ -41,7 +41,7 @@ class ControllerMakeCommand extends GeneratorCommand
         if($this->option('auth')) {
             $stub = '/stubs/controllers/controller.auth.stub';
         } elseif ($this->option('api')) {
-            $stub = '/stubs/controllers/controller.api.stub';
+           // $stub = '/stubs/controllers/controller.api.stub';
         } elseif ($this->option('model')) {
             $stub = '/stubs/controllers/controller.model.stub';
         }
