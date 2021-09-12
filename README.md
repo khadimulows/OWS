@@ -15,6 +15,7 @@ Via Composer
 $ composer require pitangent/workflow
 ```
 
+
 ``` bash
 Pitangent\Workflow\WorkflowServiceProvider::class
 ```
