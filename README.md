@@ -15,17 +15,23 @@ Via Composer
 $ composer require pitangent/workflow
 ```
 
+## Provider 
+Add this provider in providers section of  config/app.php file
 
 ``` bash
 Pitangent\Workflow\WorkflowServiceProvider::class
 ```
 
-php artisan jwt:secret
-
 ## Usage
+
+Generation a controller for API
 ``` bash
-$ php artisan pitangent:controller --model={{MODEL_NAME}}
+$ php artisan pitangent:controller {{CONTROLLER_NAME}} --model={{MODEL_NAME}} --api
 ```
+
+## Routes
+Add those routes your routes/api.php file.
+
 ``` bash
 Route::group(['prefix' => 'auth'], function () {
     Route::post('signup',                   'API\AuthController@register');
@@ -35,7 +41,7 @@ Route::group(['prefix' => 'auth'], function () {
     Route::post('set-password',             'API\AuthController@resetPassword');
 
     //AUTH PROTECTED
-    Route::group(['middleware' => 'jwt:auth'], function () {
+    Route::group(['middleware' => 'jwt'], function () {
         Route::get('me',                    'API\AuthController@me');
         Route::get('logout',                'API\AuthController@logout');
         Route::post('change-password',      'API\AuthController@changePassword');
@@ -48,12 +54,6 @@ Route::group(['prefix' => 'auth'], function () {
 ## Change log
 
 Please see the [changelog](changelog.md) for more information on what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
 
 ## Contributing
 
