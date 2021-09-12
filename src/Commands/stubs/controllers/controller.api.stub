@@ -120,7 +120,7 @@ class {{ class }} extends RestController
             return $this->responseMessages( $validation->errors() );
 
         ${{ modelVariable }} = {{ model }}::findOrFail( $id );
-        ${{ modelVariable }} = ${{ modelVariable }}->update( $params );
+        ${{ modelVariable }}->update( $params );
         $this->message = 'Successfully Updated';
         return $this->response( ${{ modelVariable }} );
     }
