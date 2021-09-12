@@ -20,7 +20,7 @@ class AuthMakeCommand extends Command
      *
      * @var string
      */
-    protected $name = 'pitangent:auth';
+    protected $name = 'pats:auth';
 
     /**
      * The console command description.

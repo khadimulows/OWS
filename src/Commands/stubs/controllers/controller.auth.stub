@@ -2,13 +2,17 @@
 
 namespace {{ namespace }};
 
+use Exception;
 use {{ namespacedModel }};
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
 use Tymon\JWTAuth\Facades\JWTAuth;
-use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use Tymon\JWTAuth\Exceptions\JWTException;
+use Tymon\JWTAuth\Exceptions\TokenInvalidException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 use Pitangent\Workflow\Http\Controllers\AuthRestController;
 
 class {{ class }} extends AuthRestController
@@ -68,7 +72,8 @@ class {{ class }} extends AuthRestController
         if( $validation->fails() )
             return $this->responseMessages( $validation->errors() );
 
-        ${{ modelVariable }} = {{ model }}::create(  $params );
+        $params['password'] = Hash::make( $params['password'] );
+        ${{ modelVariable }} = {{ model }}::create( $params );
 
         $this->message = 'Successfully Register';
         return $this->response( ${{ modelVariable }}, TRUE, Response::HTTP_CREATED );
@@ -92,6 +97,37 @@ class {{ class }} extends AuthRestController
 
     /*
     |-------------------------------------------------------------------------------
+    | Refresh the expire token
+    |-------------------------------------------------------------------------------
+    | URL:              /api/auth/me
+    | Method:           POST
+    | @param $request   Illuminate\Http\Request
+    | @return           Illuminate\Http\JsonResponse
+    */
+    public function refresh()
+    {
+        $token = null;
+        try {
+            $token = auth()->refresh();
+        } catch (Exception $e) {
+            if ( $e instanceof TokenInvalidException )
+                $this->message = "Token is invalid";
+            else if ( $e instanceof TokenExpiredException )
+                $this->message = "Token is expired";
+            else
+                $this->message = "Something is wrong";
+            return $this->response( NULL, FALSE, 401 );
+        }
+
+        $data = [
+            'token' => $token,
+            'user'  =>  auth()->user()
+        ];
+        $this->message = 'Token successfully refresh';
+        return $this->response($data);
+    }
+    /*
+    |-------------------------------------------------------------------------------
     | Request authenticated user password
     |-------------------------------------------------------------------------------
     | URL:              /api/auth/password/request
@@ -109,17 +145,15 @@ class {{ class }} extends AuthRestController
         if( $validator->fails() )
             return $this->responseMessages( $validator->errors() );
 
-        $use = $request->get( 'email' );
+        $user = {{ model }}::where( $request->only('email') )->firstOrfail();
 
-        {{ model }}::where()->firstOrfail()
-        if ( !$token = JWTAuth::attempt( $credentials ) ) {
-            $this->message = 'Invalid credentials';
-            return $this->response( NULL, FALSE, Response::HTTP_BAD_REQUEST );
-        }
+        $token = app('auth.password')->createToken( $user );
 
-        $this->user = auth()->user();
+        //Sent Email Notification Here
 
-        return $this->response( [ "user" => $this->user, "token" => $token ] );
+
+        $this->message = "Reset token successfully created";
+        return $this->response( null );
     }
 
     /*
@@ -133,7 +167,34 @@ class {{ class }} extends AuthRestController
     */
     public function resetPassword( Request $request ) : JsonResponse
     {
+        $rules = [
+            'email' => 'required|email',
+            'token' => 'required',
+            'password' => 'required|min:6',
+            'confirmaPassword' => 'required|same:password',
+        ];
+        $validator = Validator::make( $request->all(), $rules );
 
+        if( $validator->fails() )
+            return $this->responseMessages( $validator->errors() );
+
+        $user = {{ model }}::where( $request->only('email') )->firstOrfail();
+        $token = $request->get('token');
+        $check = app('auth.password')->tokenExists( $user, $token );
+
+        if( !$check ) {
+            $this->message = "Invalid token";
+            return $this->response( null , FALSE, 400 );
+        }
+
+        $user->password = Hash::make( $request->password );
+        $user->save();
+        app('auth.password')->deleteToken( $user );
+        //Sent Email Notification Here
+
+
+        $this->message = "Password reset successfully done";
+        return $this->response( null );
     }
 
     /*
@@ -147,7 +208,30 @@ class {{ class }} extends AuthRestController
     */
     public function changePassword( Request $request ) : JsonResponse
     {
+        $rules = [
+            'password' => 'required|min:6',
+            'newPassword' => 'required|min:6',
+            'confirmaNewPassword' => 'required|same:newPassword',
+        ];
+        $validator = Validator::make( $request->all(), $rules );
 
+        if( $validator->fails() )
+            return $this->responseMessages( $validator->errors() );
+
+        $check = Hash::check( $request->password, $this->user->password );
+        if( !$check ) {
+            $this->message = "Invalid old password";
+            return $this->response( null , FALSE, 400 );
+        }
+
+
+        $this->user->password = Hash::make( $request->password );
+        $this->user->save();
+        //Sent Email Notification Here
+
+
+        $this->message = "Password successfully changed";
+        return $this->response( null );
     }
 
 }

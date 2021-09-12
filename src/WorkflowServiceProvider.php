@@ -30,6 +30,8 @@ class WorkflowServiceProvider extends ServiceProvider
             Commands\AuthMakeCommand::class,
             Commands\NotificationMakeCommand::class
         ]);
+
+        $this->app['router']->aliasMiddleware('jwt', Http\Middlewares\JWTMiddleware::class);
     }
 
     /**

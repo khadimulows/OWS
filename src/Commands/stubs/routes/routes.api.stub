@@ -1,0 +1,15 @@
+// Auth Routes
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('signup',                   'API\AuthController@register');
+    Route::post('signin',                   'API\AuthController@authenticate');
+    Route::get('refresh',                   'API\AuthController@refresh');
+    Route::post('request-password',         'API\AuthController@requestPassword');
+    Route::post('set-password',             'API\AuthController@resetPassword');
+
+    //AUTH PROTECTED
+    Route::group(['middleware' => 'jwt'], function () {
+        Route::get('me',                    'API\AuthController@me');
+        Route::get('logout',                'API\AuthController@logout');
+        Route::post('change-password',      'API\AuthController@changePassword');
+    });
+});

@@ -23,9 +23,28 @@ Pitangent\Workflow\PermissionServiceProvider::class,
 Pitangent\Workflow\WorkflowServiceProvider::class
 ```
 
+php artisan jwt:secret
+
 ## Usage
 ``` bash
 $ php artisan pitangent:controller --model={{MODEL_NAME}}
+```
+``` bash
+Route::group(['prefix' => 'auth'], function () {
+    Route::post('signup',                   'API\AuthController@register');
+    Route::post('signin',                   'API\AuthController@authenticate');
+    Route::get('refresh',                   'API\AuthController@refresh');
+    Route::post('request-password',         'API\AuthController@requestPassword');
+    Route::post('set-password',             'API\AuthController@resetPassword');
+
+    //AUTH PROTECTED
+    Route::group(['middleware' => 'jwt:auth'], function () {
+        Route::get('me',                    'API\AuthController@me');
+        Route::get('logout',                'API\AuthController@logout');
+        Route::post('change-password',      'API\AuthController@changePassword');
+    });
+});
+
 ```
 
 

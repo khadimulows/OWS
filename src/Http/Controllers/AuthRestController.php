@@ -12,6 +12,7 @@ use Pitangent\Workflow\Contracts\AuthRestController as RestContract;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
 
+
 abstract class AuthRestController extends Controller implements RestContract
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests, ResponseTrait;
