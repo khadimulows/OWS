@@ -16,10 +16,6 @@ $ composer require pitangent/workflow
 ```
 
 ``` bash
-Pitangent\Workflow\PermissionServiceProvider::class,
-```
-
-``` bash
 Pitangent\Workflow\WorkflowServiceProvider::class
 ```
 
