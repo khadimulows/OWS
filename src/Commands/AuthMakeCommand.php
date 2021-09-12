@@ -3,7 +3,6 @@
 namespace Pitangent\Workflow\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Str;
 use Symfony\Component\Console\Input\InputOption;
 
 class AuthMakeCommand extends Command
@@ -52,6 +51,9 @@ class AuthMakeCommand extends Command
         }
 
         $this->call('pats:controller', $params);
+        if( $this->isApi ){
+            $this->call('jwt:secret');
+        }
     }
 
     /**
