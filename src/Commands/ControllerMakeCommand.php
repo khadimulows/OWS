@@ -119,7 +119,7 @@ class ControllerMakeCommand extends GeneratorCommand
                     $params['--auth'] = true;
                 }
 
-                $this->call('pitangent:model', $params);
+                $this->call('pats:model', $params);
             }
         }
 
@@ -154,7 +154,7 @@ class ControllerMakeCommand extends GeneratorCommand
                     $params['--auth'] = true;
                 }
 
-                $this->call('pitangent:model', $params);
+                $this->call('pats:model', $params);
             }
         }
 

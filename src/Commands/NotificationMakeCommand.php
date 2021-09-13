@@ -129,7 +129,7 @@ class NotificationMakeCommand extends GeneratorCommand
                     $params['--auth'] = true;
                 }
 
-                $this->call('pitangent:model', $params);
+                $this->call('pats:model', $params);
             }
         }
 
@@ -166,7 +166,7 @@ class NotificationMakeCommand extends GeneratorCommand
                     $params['--auth'] = true;
                 }
 
-                $this->call('pitangent:model', $params);
+                $this->call('pats:model', $params);
             }
         }
 
