@@ -1,0 +1,10 @@
+<?php
+
+namespace {{ namespace }};
+
+use Pitangent\Workflow\Http\Services\BaseService;
+
+class {{ class }} extends BaseService
+{
+
+}

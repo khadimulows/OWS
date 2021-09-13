@@ -26,7 +26,7 @@ Pitangent\Workflow\WorkflowServiceProvider::class
 
 Generation a controller for API
 ``` bash
-$ php artisan pitangent:controller {{CONTROLLER_NAME}} --model={{MODEL_NAME}} --api
+$ php artisan pats:controller {{CONTROLLER_NAME}} --model={{MODEL_NAME}} --api
 ```
 
 ## Routes

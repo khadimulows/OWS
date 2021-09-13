@@ -141,7 +141,7 @@ class ModelMakeCommand extends GeneratorCommand
         if($this->isApi)
             $options['--api'] = $this->isApi;
 
-        $this->call('pitangent:controller', array_filter($options));
+        $this->call('pats:controller', array_filter($options));
     }
 
     /**
