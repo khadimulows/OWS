@@ -21,6 +21,11 @@ Add this provider in providers section of  config/app.php file
 ``` bash
 Pitangent\Workflow\WorkflowServiceProvider::class
 ```
+## Publish confile file
+php artisan vendor:publish --tag="pitangent-config"
+php artisan vendor:publish --tag="pitangent-templates"
+
+
 
 ## Usage
 

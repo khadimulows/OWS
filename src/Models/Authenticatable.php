@@ -2,22 +2,23 @@
 
 namespace Pitangent\Workflow\Models;
 
-use Illuminate\Auth\Authenticatable as AuthenticatableBase;
 use Illuminate\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Model;
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Foundation\Auth\Access\Authorizable;
+use Illuminate\Auth\Authenticatable as AuthenticatableBase;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Foundation\Auth\Access\Authorizable;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 
 abstract class Authenticatable extends Model implements
     AuthenticatableContract,
     AuthorizableContract,
     CanResetPasswordContract, JWTSubject
 {
-    use AuthenticatableBase, Authorizable, CanResetPassword, MustVerifyEmail;
+    use AuthenticatableBase, Authorizable, CanResetPassword, MustVerifyEmail, Notifiable;
 
     /**
      * @var FILTER_KEYS array

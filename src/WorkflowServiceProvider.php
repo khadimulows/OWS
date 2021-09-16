@@ -14,10 +14,10 @@ class WorkflowServiceProvider extends ServiceProvider
     public function boot(): void
     {
         // $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'ows');
-        // $this->loadViewsFrom(__DIR__.'/../resources/views', 'ows');
         // $this->loadMigrationsFrom(__DIR__.'/../database/migrations');
         // $this->loadRoutesFrom(__DIR__.'/routes.php');
 
+        $this->loadViewsFrom(__DIR__.'/resources/views', 'pitangent');
         // Publishing is only necessary when using the CLI.
         if ($this->app->runningInConsole()) {
             $this->bootForConsole();
@@ -42,11 +42,10 @@ class WorkflowServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(__DIR__.'/../config/workflow.php', 'workflow');
-
+        $this->mergeConfigFrom(__DIR__.'/../config/pitangent.php', 'pitangent');
         // Register the service the package provides.
         $this->app->singleton('workflow', function ($app) {
-            return new Workflow;
+            return $app->make(Workflow::class);
         });
     }
 
@@ -69,7 +68,11 @@ class WorkflowServiceProvider extends ServiceProvider
     {
         // Publishing the configuration file.
         $this->publishes([
-            __DIR__.'/../config/workflow.php' => config_path('workflow.php'),
-        ], 'workflow.config');
+            __DIR__.'/../config/pitangent.php' => $this->app->configPath('pitangent.php'),
+        ], 'pitangent-config');
+
+        $this->publishes([
+            __DIR__.'/resources/views' => $this->app->resourcePath('views'),
+        ], 'pitangent-templates');
     }
 }
