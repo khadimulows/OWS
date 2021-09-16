@@ -21,20 +21,20 @@ Add this provider in providers section of  config/app.php file
 ``` bash
 Pitangent\Workflow\WorkflowServiceProvider::class
 ```
+
 ## Publish confile file
 php artisan vendor:publish --tag="pitangent-config"
 php artisan vendor:publish --tag="pitangent-templates"
 
 
 
-## Usage
-
+## Creating a controller
 Generation a controller for API
 ``` bash
 $ php artisan pats:controller {{CONTROLLER_NAME}} --model={{MODEL_NAME}} --api
 ```
 
-## Routes
+## Routes 
 Add those routes your routes/api.php file.
 
 ``` bash
