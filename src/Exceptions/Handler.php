@@ -55,7 +55,7 @@ class Handler extends ExceptionHandler
         if ( $request->expectsJson() || $request->is('api/*') ) {
             return $this->handleApiException($request, $exception);
         }
-    
+
         return parent::render($request, $exception);
     }
 
@@ -71,7 +71,7 @@ class Handler extends ExceptionHandler
             $statusCode = $exception->getStatusCode();
         else
             $statusCode = Response::HTTP_INTERNAL_SERVER_ERROR;
-       
+
         $response = [
             'data' => null,
             'message' => '',
@@ -101,7 +101,7 @@ class Handler extends ExceptionHandler
                 break;
         }
 
-        if (config('workflow.API_DEBUG')) {
+        if (config('pitangent.API_DEBUG')) {
             $response['trace'] = $exception->getTrace();
         }
 

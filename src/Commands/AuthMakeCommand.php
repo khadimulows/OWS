@@ -54,6 +54,7 @@ class AuthMakeCommand extends Command
         if( $this->isApi ){
             $this->call('jwt:secret');
         }
+        $this->call('queue:table');
     }
 
     /**
